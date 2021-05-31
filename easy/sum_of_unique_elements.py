@@ -24,3 +24,19 @@ class Solution:
       if value == 1:
         sum += key
     return sum
+
+# Follow up optimization eliminating the second loop
+
+class Solution:
+  def sumOfUnique(self, nums: List[int]) -> int:
+    hashtable = {}
+    count = 0
+    for num in nums:
+      if num in hashtable:
+        hashtable[num] += 1
+      if hashtable[num] == 2:
+         count -= num
+      else:
+        hashtable[num] = 1
+        count += num
+    return count
