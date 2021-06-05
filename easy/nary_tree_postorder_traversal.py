@@ -25,7 +25,7 @@ class Solution:
     self.navigate(root, arr)
     return arr
     
-  def navigate(self, root: 'Node', arr: List[int]) -> List[int]:
+  def navigate(self, root: 'Node', arr: List[int]):
     if root is None:
       return
     for child in root.children:
