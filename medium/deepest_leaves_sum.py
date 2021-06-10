@@ -13,6 +13,9 @@
 #     self.val = val
 #     self.left = left
 #     self.right = right
+
+# Recursive traversal solution
+
 class Solution:
   def deepestLeavesSum(self, root: TreeNode) -> int:
     target_depth = self.get_depth(root, 0)
@@ -36,3 +39,23 @@ class Solution:
       new_depth = current_depth + 1
       self.get_sum_of_deepest(root.left, target_depth, new_depth, deepest_nodes)
       self.get_sum_of_deepest(root.right, target_depth, new_depth, deepest_nodes)
+
+# Stack level traversal solution
+
+# Definition for a binary tree node.
+# class TreeNode:
+#   def __init__(self, val=0, left=None, right=None):
+#     self.val = val
+#     self.left = left
+#     self.right = right
+class Solution:
+  def deepestLeavesSum(self, root: TreeNode) -> int:
+    stack = [root]
+    while True:
+      lefts = [node.left for node in stack if node.left]
+      rights = [node.right for node in stack if node.right]
+      next = lefts + rights
+      if len([node for node in next]) == 0:
+        break
+      stack = next
+      return sum([node.val for node in stack])
