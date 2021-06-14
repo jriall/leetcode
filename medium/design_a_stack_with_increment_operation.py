@@ -53,7 +53,7 @@ class CustomStack:
 
   def increment(self, k: int, val: int) -> None:
     for index in range(min(len(self.stack), k)):
-      self.stack[index] = self.stack[index] + val
+      self.stack[index] += val
 
 # Your CustomStack object will be instantiated and called as such:
 # obj = CustomStack(maxSize)
