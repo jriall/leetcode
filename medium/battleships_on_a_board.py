@@ -41,3 +41,17 @@ class Solution:
     while right < len(board[0]) and board[i][right] == 'X':
       board[i][right] = None
       right += 1
+
+# Simplified solution without modifying the board
+
+class Solution:
+  def countBattleships(self, board: List[List[str]]) -> int:
+    result = 0
+    for i in range(len(board)):
+      for j in range(len(board[0])):
+        is_x = board[i][j] == 'X'
+        is_topmost = i == 0 or board[i - 1][j] == '.'
+        is_leftmost = j == 0 or board[i][j - 1] == '.'
+        if is_x and is_topmost and is_leftmost:
+          result += 1
+    return result
