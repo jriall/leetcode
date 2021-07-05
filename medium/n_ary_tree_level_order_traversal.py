@@ -10,6 +10,8 @@
 # Input: root = [1,null,3,2,4,null,5,6]
 # Output: [[1],[3,2,4],[5,6]]
 
+import collections
+
 """
 # Definition for a Node.
 class Node:
@@ -23,9 +25,9 @@ class Solution:
     results = []
     if root is None:
       return results
-    stack = [(root, 0)]
+    stack = collections.deque([(root, 0)])
     while len(stack):
-      next_node, level = stack.pop(0)
+      next_node, level = stack.popleft()
       for child in next_node.children:
         stack.append((child, level + 1))
       if level < len(results):
