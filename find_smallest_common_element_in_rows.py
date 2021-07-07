@@ -31,5 +31,32 @@ class Solution:
       if value == len(mat):
         return key
     return -1
-        
-      
+
+# O(rclogc) time, O(1) space 
+class Solution:
+  def smallestCommonElement(self, mat: List[List[int]]) -> int:
+    for num in mat[0]:
+      is_in_all_rows = self.do_binary_searches(mat, num)
+      if is_in_all_rows:
+        return num
+    return -1
+
+  def do_binary_searches(self, mat: List[List[int]], num: int) -> bool:
+    for row in mat[1:]:
+      result = self.binary_search(row, num)
+      if not result:
+        return False
+      return True
+
+  def binary_search(self, row: List[int], num: int) -> bool:
+    start = 0
+    end = len(row) - 1
+    while start <= end:
+      middle = (start + end) // 2
+      if row[middle] == num:
+        return True
+      elif row[middle] < num:
+        start = middle + 1
+      else:
+        end = middle - 1
+      return False
