@@ -25,10 +25,10 @@
 # nodes before the intersected node in B.
 
 # Definition for singly-linked list.
-# class ListNode:
-#   def __init__(self, x):
-#     self.val = x
-#     self.next = None
+class ListNode:
+  def __init__(self, x):
+    self.val = x
+    self.next = None
 
 class Solution:
   def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
@@ -55,3 +55,15 @@ class Solution:
       depth += 1
       curr = curr.next
     return depth
+
+# Simpler solution with the pointer wrapping round at the end and traversing the
+# other list until they hit the same node.
+
+class Solution:
+  def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+    p1 = headA
+    p2 = headB
+    while p1 is not p2:
+      p1 = p1.next if p1 else headB
+      p2 = p2.next if p2 else headA
+    return p1
