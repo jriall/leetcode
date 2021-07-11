@@ -14,6 +14,8 @@
 #     self.val = val
 #     self.left = left
 #     self.right = right
+
+# O(n) time, O(n) space solution
 class Solution:
   def getMinimumDifference(self, root: TreeNode) -> int:
     arr = []
@@ -29,4 +31,21 @@ class Solution:
     self.in_order_traversal(root.left, arr)
     arr.append(root.val)
     self.in_order_traversal(root.right, arr)
-    
+
+# O(n) time, O(1) solution
+class Solution:
+  def __init__(self):
+    self.prev = float('-inf')
+    self.min_difference = float('inf')
+
+  def getMinimumDifference(self, root: TreeNode) -> int:
+    self.in_order_traversal(root)
+    return self.min_difference
+        
+  def in_order_traversal(self, root: TreeNode):
+    if root is None:
+      return
+    self.in_order_traversal(root.left)
+    self.min_difference = min(self.min_difference, root.val - self.prev)
+    self.prev = root.val
+    self.in_order_traversal(root.right)
