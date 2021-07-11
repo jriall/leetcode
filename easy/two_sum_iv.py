@@ -34,3 +34,20 @@ class Solution:
       self._seen = True
     self._hashtable[root.val] = True
     self.traverse(root.right, k)
+
+# Simpler solution using DFS
+class Solution: 
+  def findTarget(self, root: TreeNode, k: int) -> bool:
+    stack = [root]
+    seen = {}
+    while len(stack):
+      next = stack.pop(0)
+      target = k - next.val
+      if target in seen:
+        return True
+      seen[next.val] = True
+      if next.left:
+        stack.append(next.left)
+      if next.right:
+        stack.append(next.right)
+    return False
